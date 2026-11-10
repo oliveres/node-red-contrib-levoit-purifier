@@ -1,5 +1,7 @@
 'use strict';
 
+const POST_COMMAND_POLL_DELAY = 5000;
+
 module.exports = function (RED) {
   function VeSyncPurifierNode(config) {
     RED.nodes.createNode(this, config);
@@ -144,7 +146,12 @@ module.exports = function (RED) {
             return;
         }
 
-        // After any command, poll for updated status
+        // After a command, give the cloud time to receive the device's report
+        // before polling: deviceProp lagged 1-5 s behind commands on an
+        // EverestAir, so an immediate poll returned the previous state.
+        if (act !== 'status' && act !== 'poll') {
+          await new Promise((resolve) => setTimeout(resolve, POST_COMMAND_POLL_DELAY));
+        }
         await pollStatus();
         done();
       } catch (err) {

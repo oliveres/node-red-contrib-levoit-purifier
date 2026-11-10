@@ -43,7 +43,7 @@
 
           deviceSelect.append('<option value="">-- Select device --</option>');
           devices.forEach(function (d) {
-            var label = d.name + ' (' + d.type + ')' + (d.online ? ' ●' : ' ○');
+            var label = d.name + ' (' + d.type + ')' + (d.online === 'online' ? ' ●' : ' ○');
             var opt = $('<option></option>')
               .val(d.cid)
               .text(label)

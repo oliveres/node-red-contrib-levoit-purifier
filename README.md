@@ -18,6 +18,7 @@ Node-RED node for controlling **Levoit air purifiers** via the VeSync cloud API.
 |-------|--------|
 | Vital 100S (LAP-V102S) | ✅ |
 | Vital 200S | Should work |
+| EverestAir (LAP-EL551S) | ✅ |
 | Core 200S | Should work |
 | Core 300S | ✅ |
 | Core 400S | Should work |
@@ -75,6 +76,8 @@ npm install node-red-contrib-levoit-purifier
 ### Output
 
 The node outputs `msg.payload` with the current device status on every poll and after every command.
+
+VeSync's `getPurifierStatus` can lag the real device by several minutes after a command. Power, mode, fan level and air quality are therefore taken from the device list (`deviceProp`), which is fetched fresh on every poll; `payload.power_source` shows where the power state came from.
 
 ### Diagnostics
 
