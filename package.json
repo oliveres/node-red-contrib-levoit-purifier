@@ -18,7 +18,7 @@
   "author": "Oldrich Sveda",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oldrichsveda/node-red-contrib-levoit-purifier"
+    "url": "git+https://github.com/oliveres/node-red-contrib-levoit-purifier.git"
   },
   "node-red": {
     "version": ">=2.0.0",
