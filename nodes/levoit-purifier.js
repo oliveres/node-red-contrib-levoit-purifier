@@ -59,7 +59,8 @@ module.exports = function (RED) {
         }
       } catch (err) {
         node.status({ fill: 'red', shape: 'ring', text: err.message });
-        node.error(`Levoit poll error: ${err.message}`);
+        node.send({ topic: 'levoit/purifier/error', payload: { error: err.message } });
+        node.error(err);
       }
     }
 

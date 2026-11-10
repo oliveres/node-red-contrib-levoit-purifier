@@ -90,7 +90,8 @@ module.exports = function (RED) {
         name: d.deviceName,
         type: d.deviceType,
         configModule: d.configModule,
-        online: d.deviceProp ? d.deviceProp.connectionStatus === 'online' : false,
+        // connectionStatus may live in deviceProp (legacy) or top-level; report unknown when absent
+        online: (d.deviceProp && d.deviceProp.connectionStatus) || d.connectionStatus || 'unknown',
         model: d.deviceType,
       }));
       res.json(result);

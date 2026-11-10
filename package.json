@@ -27,6 +27,9 @@
       "levoit-purifier": "nodes/levoit-purifier.js"
     }
   },
+  "bin": {
+    "levoit-diagnose": "bin/diagnose.js"
+  },
   "engines": {
     "node": ">=16.0.0"
   },

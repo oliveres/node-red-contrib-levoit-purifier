@@ -19,7 +19,7 @@ Node-RED node for controlling **Levoit air purifiers** via the VeSync cloud API.
 | Vital 100S (LAP-V102S) | ✅ |
 | Vital 200S | Should work |
 | Core 200S | Should work |
-| Core 300S | Should work |
+| Core 300S | ✅ |
 | Core 400S | Should work |
 | Core 600S | Should work |
 
@@ -75,6 +75,22 @@ npm install node-red-contrib-levoit-purifier
 ### Output
 
 The node outputs `msg.payload` with the current device status on every poll and after every command.
+
+### Diagnostics
+
+`bin/diagnose.js` prints the raw VeSync request/response so field placement can be checked against a real device. Credentials come from argv or environment variables and are never stored in the repository:
+
+```bash
+VESYNC_EMAIL=you@example.com VESYNC_PASSWORD=secret \
+LEVOIT_CID=<cid> LEVOIT_CONFIG_MODULE=<configModule> \
+node bin/diagnose.js status --raw
+
+VESYNC_EMAIL=... VESYNC_PASSWORD=... node bin/diagnose.js devices
+VESYNC_EMAIL=... VESYNC_PASSWORD=... LEVOIT_CID=<cid> \
+  LEVOIT_CONFIG_MODULE=<configModule> node bin/diagnose.js on
+```
+
+Use `node bin/diagnose.js --help` for all options. Commands: `status`, `on`, `off`, `devices`, `command`. Set `--endpoint bycid` / `--endpoint byuuid` or `--variant core|vital|both` to compare payloads. The token is redacted in the echoed request.
 
 ## License
 
